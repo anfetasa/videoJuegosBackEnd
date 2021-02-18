@@ -8,6 +8,7 @@ user = {
     "home_user": "/api/v01/user/home", "home": HomeControllers.as_view("home_api")
 }
 
+
 vendedor = {
     "vendedor_api": "/api/v01/vendedor/login", "login_vendedor_controllers": InicioVendedorControllers.as_view("vendedor_api"),
 }

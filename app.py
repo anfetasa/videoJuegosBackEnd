@@ -9,6 +9,7 @@ app.add_url_rule(user["login_user"], view_func=user["login_user_controllers"])
 app.add_url_rule(user["register_user"], view_func=user["register_user_controllers"])
 app.add_url_rule(user["Carrito_user"], view_func=user["Carrito"])
 app.add_url_rule(user["home_user"], view_func=user["home"])
+app.add_url_rule(user["stock"], view_func=user["stock_controllers"])
 
 # vendedor
 

@@ -12,5 +12,5 @@ class Register:
     def get_user(self):
         data = {}
         data['login'] = []
-        res = conexion.Search("select * from usuarios where correo = %s ",[self.correo]) 
+        res = conexion.Search("select * from usuarios where correo = %s ",[self.correo])
         return res

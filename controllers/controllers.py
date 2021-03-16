@@ -7,6 +7,7 @@ import datetime
 from flask_mysqldb import MySQL
 from models.register import Register 
 from models.games import Games
+from models.details import Details
 
 
 
@@ -53,57 +54,53 @@ class HomeControllers(MethodView):
         answer = ga.get_games()
         return jsonify(answer)
 
-"""
-class CarritoControllers(MethodView):
 
-    def post(self):
+# class CarritoControllers(MethodView):
+
+#     def post(self):
         
-        return jsonify({"hola"}), 200
+#         return jsonify({"hola"}), 200
 
-    def get(self):
-        if (request.headers.get('Authorization')):
-            token = request.headers.get('Authorization').split(" ")
-            print("-----------------_", token[1])
-            try:
-                data = jwt.decode(token[1], KEY_TOKEN_AUTH , algorithms=['HS256'])
-                return jsonify({"Status": "Autorizado por token", "emailextraido": data.get("email")}), 200
-            except:
-                return jsonify({"Status": "TOKEN NO VALIDO"}), 403
-        return jsonify({"Status": "No ha enviado un token"}), 403
+#     def get(self):
+#         if (request.headers.get('Authorization')):
+#             token = request.headers.get('Authorization').split(" ")
+#             print("-----------------_", token[1])
+#             try:
+#                 data = jwt.decode(token[1], KEY_TOKEN_AUTH , algorithms=['HS256'])
+#                 return jsonify({"Status": "Autorizado por token", "emailextraido": data.get("email")}), 200
+#             except:
+#                 return jsonify({"Status": "TOKEN NO VALIDO"}), 403
+#         return jsonify({"Status": "No ha enviado un token"}), 403
     
 
-class InicioVendedorControllers(MethodView):
-    def post(self):
-        #simulacion de espera en el back con 1.5 segundos
-        time.sleep(3)
-        content = request.get_json()
-        correo = content.get("correo")
-        contraseña = content.get("contraseña")
+# class InicioVendedorControllers(MethodView):
+#     def post(self):
+#         #simulacion de espera en el back con 1.5 segundos
+#         time.sleep(3)
+#         content = request.get_json()
+#         correo = content.get("correo")
+#         contraseña = content.get("contraseña")
 
-        return jsonify({"register ok": True, "correo": correo, "contraseña": contraseña}), 200
+#         return jsonify({"register ok": True, "correo": correo, "contraseña": contraseña}), 200
 
-    def get(self):
-        if (request.headers.get('Authorization')):
-            token = request.headers.get('Authorization').split(" ")
-            print("-----------------_", token[1])
-            try:
-                data = jwt.decode(token[1], KEY_TOKEN_AUTH , algorithms=['HS256'])
-                return jsonify({"Status": "Autorizado por token", "emailextraido": data.get("email")}), 200
-            except:
-                return jsonify({"Status": "TOKEN NO VALIDO"}), 403
-        return jsonify({"Status": "No ha enviado un token"}), 403
+#     def get(self):
+#         if (request.headers.get('Authorization')):
+#             token = request.headers.get('Authorization').split(" ")
+#             print("-----------------_", token[1])
+#             try:
+#                 data = jwt.decode(token[1], KEY_TOKEN_AUTH , algorithms=['HS256'])
+#                 return jsonify({"Status": "Autorizado por token", "emailextraido": data.get("email")}), 200
+#             except:
+#                 return jsonify({"Status": "TOKEN NO VALIDO"}), 403
+#         return jsonify({"Status": "No ha enviado un token"}), 403
 
 
 class StockControllers(MethodView):
  
-    def get(self):
-        if (request.headers.get('Authorization')):
-            token = request.headers.get('Authorization').split(" ")
-            print("-----------------_", token[1])
-            try:
-                data = jwt.decode(token[1], KEY_TOKEN_AUTH , algorithms=['HS256'])
-                return jsonify({"Status": "Autorizado por token", "emailextraido": data.get("email")})
-            except:
-                return jsonify({"Status": "TOKEN NO VALIDO"}), 403
-            return jsonify({"Status": "No ha enviado un token"}), 403"""
+    def get(self,id):
+        details = Details()
+        details.id = int(id)
+        print(id)
+        answer= details.GetDetails()
+        return jsonify(answer), 200
      

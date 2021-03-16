@@ -100,7 +100,6 @@ class StockControllers(MethodView):
     def get(self,id):
         details = Details()
         details.id = int(id)
-        print(id)
         answer= details.GetDetails()
         return jsonify(answer), 200
      

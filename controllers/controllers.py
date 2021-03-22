@@ -54,46 +54,28 @@ class HomeControllers(MethodView):
         ga = Games()
         answer = ga.get_games()
         return jsonify(answer)
-
-
-# class CarritoControllers(MethodView):
-
-#     def post(self):
-        
-#         return jsonify({"hola"}), 200
-
-#     def get(self):
-#         if (request.headers.get('Authorization')):
-#             token = request.headers.get('Authorization').split(" ")
-#             print("-----------------_", token[1])
-#             try:
-#                 data = jwt.decode(token[1], KEY_TOKEN_AUTH , algorithms=['HS256'])
-#                 return jsonify({"Status": "Autorizado por token", "emailextraido": data.get("email")}), 200
-#             except:
-#                 return jsonify({"Status": "TOKEN NO VALIDO"}), 403
-#         return jsonify({"Status": "No ha enviado un token"}), 403
     
 
-# class InicioVendedorControllers(MethodView):
-#     def post(self):
-#         #simulacion de espera en el back con 1.5 segundos
-#         time.sleep(3)
-#         content = request.get_json()
-#         correo = content.get("correo")
-#         contraseña = content.get("contraseña")
+class ToPostControllers(MethodView):
+    def post(self):
+        games = Games()
+        content = request.get_json()
+        nombre = content.get("nombre")
+        descripcion = content.get("descripcion")
+        precio = content.get("precio")
+        categoria = content.get("categoria")
+        img = content.get("img")
+        
+        games.nombre = nombre
+        games.descripcion = descripcion
+        games.precio = precio
+        games.categoria = categoria
+        games.img = img
+        message = games.add_games()
+        
+        return jsonify({"Status": "To post Ok",
+                        }), 200
 
-#         return jsonify({"register ok": True, "correo": correo, "contraseña": contraseña}), 200
-
-#     def get(self):
-#         if (request.headers.get('Authorization')):
-#             token = request.headers.get('Authorization').split(" ")
-#             print("-----------------_", token[1])
-#             try:
-#                 data = jwt.decode(token[1], KEY_TOKEN_AUTH , algorithms=['HS256'])
-#                 return jsonify({"Status": "Autorizado por token", "emailextraido": data.get("email")}), 200
-#             except:
-#                 return jsonify({"Status": "TOKEN NO VALIDO"}), 403
-#         return jsonify({"Status": "No ha enviado un token"}), 403
 
 
 class StockControllers(MethodView):

@@ -19,7 +19,7 @@ app.add_url_rule(user["stock_user"], view_func=user["stock"])
 
 # vendedor
 
-#app.add_url_rule(vendedor["vendedor_api"], view_func=vendedor["login_vendedor_controllers"])
+app.add_url_rule(admin["to_post"], view_func=admin["topost"])
 
 
 

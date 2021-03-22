@@ -1,4 +1,4 @@
-from controllers.controllers import RegisterUserControllers, LoginUserControllers, HomeControllers, StockControllers
+from controllers.controllers import RegisterUserControllers, LoginUserControllers, HomeControllers, StockControllers, ToPostControllers
 
 
 user = {
@@ -10,6 +10,6 @@ user = {
 }
 
  
-"""vendedor = {
-    "vendedor_api": "/api/v01/vendedor/login", "login_vendedor_controllers": InicioVendedorControllers.as_view("vendedor_api"),
-}"""
+admin = {
+    "to_post": "/api/v01/admin/topost", "topost": ToPostControllers.as_view("admin_api"),
+}

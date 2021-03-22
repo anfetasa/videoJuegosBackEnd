@@ -8,6 +8,9 @@ class Games:
         self.categoria = ''
         self.img = ''
 
+    def add_games(self):
+        res = conexion.Send('insert into videojuegos (nombre, descripcion, precio, categoria, img) values (%s, %s, %s, %s, %s)',[self.nombre,self.descripcion,self.precio,self.categoria,self.img])
+
     def get_games(self):
         data = {}
         data['videojuegos'] = []

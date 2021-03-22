@@ -9,7 +9,7 @@ class Details:
         data['videojuegos'] = []
         res = conexion.Search("select * from videojuegos where id = %s ",[self.id])
         for i in res:
-            data['videojuegos'].append({'id':i[0],'nombre':i[1],'descripcion':i[2],'precio':i[3],'categoria':i[4]})
+            data['videojuegos'].append({'id':i[0],'nombre':i[1],'descripcion':i[2],'precio':i[3],'categoria':i[4], 'img':i[5]})
         print (data['videojuegos'])
         return data['videojuegos'] 
         

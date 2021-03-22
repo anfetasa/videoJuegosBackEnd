@@ -23,10 +23,11 @@ class LoginUserControllers(MethodView):
             password_db = bytes(answer[0][3], 'utf-8')
             nombre = answer[0][1]
             if bcrypt.checkpw(contraseña, password_db):
-                encoded_jwt = jwt.encode({'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=1000), 'email': answer[0][2], 'nombre': answer[0][1]}, KEY_TOKEN_AUTH , algorithm='HS256')
-                return jsonify({"Status": "Login exitoso", "token": str(encoded_jwt), "nombre": answer[0][1], "rango": answer[0][3]}), 200     
+                encoded_jwt = jwt.encode({'exp': datetime.datetime.utcnow() + datetime.timedelta(seconds=1000), 'correo': answer[0][2], 'nombre': answer[0][1]}, KEY_TOKEN_AUTH , algorithm='HS256')
+                return jsonify({"Status": "Login exitoso", "token": str(encoded_jwt), "nombre": answer[0][1], "tipousuario": answer[0][4]}), 200     
             return jsonify({"Status": "Login incorrecto 22"}), 400
         return jsonify({"Status": "Login incorrecto 11"}), 400
+
     
 
 class RegisterUserControllers(MethodView):

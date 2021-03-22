@@ -6,11 +6,12 @@ class Games:
         self.descripcion = ''
         self.precio = ''
         self.categoria = ''
+        self.img = ''
 
     def get_games(self):
         data = {}
         data['videojuegos'] = []
-        res = conexion.View("select id, nombre, categoria from videojuegos")
+        res = conexion.View("select id, nombre, categoria, img from videojuegos")
         for i in res:
-            data['videojuegos'].append({'id':i[0],'nombre':i[1],'categoria':i[2]})
+            data['videojuegos'].append({'id':i[0],'nombre':i[1],'categoria':i[2], 'img':i[3]})
         return data['videojuegos']

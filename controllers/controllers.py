@@ -35,6 +35,10 @@ class LoginUserControllers(MethodView):
                 return jsonify({"Status": "Login exitoso", "token": str(encoded_jwt), "nombre": answer[0][1], "tipousuario": answer[0][4]}), 200     
             return jsonify({"Status": "Login incorrecto 22"}), 400
         return jsonify({"Status": "Login incorrecto 11"}), 400
+    
+   
+
+
 
     
 
@@ -58,6 +62,9 @@ class RegisterUserControllers(MethodView):
         register.nombre = nombre
         register.correo = correo
         message = register.add_user()
+        
+        messagegmail = register.gmail()
+
 
         return jsonify({"Status": "Registro ok",
                         "password_plano": contraseña}), 200

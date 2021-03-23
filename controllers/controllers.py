@@ -8,6 +8,7 @@ from flask_mysqldb import MySQL
 from models.register import Register 
 from models.games import Games
 from models.details import Details
+from validators.validator import  CreateRegisterSchema,CreateLoginSchema, CreateTopostSchema
 
 
 
@@ -16,9 +17,16 @@ class LoginUserControllers(MethodView):
     def post(self):
         login = Register()
         content = request.get_json()
+
+        create_login_schema = CreateLoginSchema()
+        errors = create_login_schema.validate(content)
+        if errors:
+            return errors, 400
+
         login.correo = content.get("correo")
         contraseña = bytes(str(content.get("contraseña")), encoding= 'utf-8')
         answer = login.get_user()
+
         if answer != "":
             password_db = bytes(answer[0][3], 'utf-8')
             nombre = answer[0][1]
@@ -37,6 +45,14 @@ class RegisterUserControllers(MethodView):
         nombre = content.get("nombre")
         correo = content.get("correo")
         contraseña = content.get("contraseña")
+
+        create_register_schema = CreateRegisterSchema()
+        errors = create_register_schema.validate(content)
+        if errors:
+            return errors, 400
+    
+        return content, 200
+
         salt = bcrypt.gensalt()
         register.contraseña = bcrypt.hashpw(bytes(str(contraseña), encoding= 'utf-8'), salt)
         register.nombre = nombre
@@ -65,6 +81,13 @@ class ToPostControllers(MethodView):
         precio = content.get("precio")
         categoria = content.get("categoria")
         img = content.get("img")
+
+        create_topost_schema = CreatetopostSchema()
+        errors = create_topost_schema.validate(content)
+        if errors:
+            return errors, 400
+    
+        return content, 200
         
         games.nombre = nombre
         games.descripcion = descripcion

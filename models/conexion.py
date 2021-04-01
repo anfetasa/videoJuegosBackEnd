@@ -2,7 +2,7 @@ from flask_mysqldb import MySQL
 from app import app
 
 app.config['MYSQL_HOST']='localhost'
-app.config['MYSQL_PASSWORD']='conexionleiton'
+app.config['MYSQL_PASSWORD']='Radamelcafetero23009'
 app.config['MYSQL_USER']='root'
 app.config['MYSQL_DB']='videojuegos'        
 

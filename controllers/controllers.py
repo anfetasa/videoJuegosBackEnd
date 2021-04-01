@@ -1,4 +1,5 @@
 from flask.views import MethodView
+import json
 from flask import jsonify, request
 import bcrypt
 import jwt
@@ -23,7 +24,7 @@ class LoginUserControllers(MethodView):
         if errors:
             return errors, 400
 
-        login.correo = content.get("correo")
+        login.correo = content.get("correo") 
         contraseña = bytes(str(content.get("contraseña")), encoding= 'utf-8')
         answer = login.get_user()
 
@@ -108,4 +109,89 @@ class StockControllers(MethodView):
         details.id = int(id)
         answer= details.GetDetails()
         return jsonify(answer), 200
-     
+
+class CarritoControllers(MethodView):
+
+    def post(self):
+        datos_token = ""
+        correo = ""
+        tokenR = request.headers.get('Authorization').split(" ")
+        token = tokenR[1]
+       
+        datos_token = jwt.decode(token, KEY_TOKEN_AUTH , algorithms=['HS256'])
+        correo = datos_token.get("correo")
+
+        json_req = request.get_json(force=True)
+        idJuego = json_req["idJuego"]
+
+        carrito = Games()
+        
+        carrito.idUsuario = correo
+        carrito.idJuego = idJuego
+
+        message = carrito.add_carrito()
+
+        return jsonify({"Status": "carrito Ok",
+                        }), 200
+
+
+class CarritoStockControllers(MethodView):
+
+    def post(self, id, token):
+        
+        datos_token = ""
+        correo = ""
+        tokenR = request.headers.get('Authorization').split(" ")
+        token = tokenR[1]
+       
+        datos_token = jwt.decode(token, KEY_TOKEN_AUTH , algorithms=['HS256'])
+        correo = datos_token.get("correo")
+
+        carrito = Games()
+        carrito.correo = correo
+
+        answer = carrito.get_games_carrito()
+        return jsonify(answer)
+
+    def delete(self, id, token):
+
+        datos_token = ""
+        correo = ""
+       
+        datos_token = jwt.decode(token, KEY_TOKEN_AUTH , algorithms=['HS256'])
+        correo = datos_token.get("correo")
+        
+        carrito = Games()
+
+        carrito.correo = correo
+        carrito.idJuego = id
+
+        message = carrito.delete_carrito()
+
+        answer = carrito.get_games_carrito()
+        return jsonify(answer)
+
+
+class BuyStockControllers(MethodView):
+    def post(self):
+
+        tokenR = request.headers.get('Authorization').split(" ")
+        token = tokenR[1]
+       
+        datos_token = jwt.decode(token, KEY_TOKEN_AUTH , algorithms=['HS256'])
+        correo = datos_token.get("correo")
+
+        json_req = request.get_json(force=True)
+        juegos = json_req["juegos"]
+
+        carrito = Games()
+
+        carrito.juegos = juegos
+        carrito.correo = correo
+
+        answer = carrito.registro_compras()
+        andwer = carrito.delete_All_carrito()
+        
+        
+        return jsonify({"Status": "Ok",
+                        }), 200

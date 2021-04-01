@@ -24,7 +24,7 @@ class Register:
         #autenticacion
         servidor.login(remitente, password)
         #mensaje 
-        mensaje = "<h1>hola</h1>"
+        mensaje = "<h1>Gracias por registrarte a Hello_hame</h1>"
         msg = MIMEMultipart()
         msg.attach(MIMEText(mensaje, 'html'))
         msg['From'] = remitente

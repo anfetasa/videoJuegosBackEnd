@@ -33,6 +33,9 @@ app.add_url_rule(user['CarritoStock_user'], defaults={'id': -1},
 
 app.add_url_rule(user["buyStock_user"], view_func=user["buyStock"])
 
+app.add_url_rule(user['registroCompra_user'], defaults={'id': -1},
+                view_func=user["registroCompra"], methods=['DELETE', 'POST'])
+
 # vendedor
 
 app.add_url_rule(admin["to_post"], view_func=admin["topost"])

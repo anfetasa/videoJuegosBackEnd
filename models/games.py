@@ -45,4 +45,13 @@ class Games:
         for item in self.juegos:
             res = conexion.Send("insert into registro_compra (idUsuario, idJuego) values (%s, %s)", [self.correo, item["id"]])
 
+    def get_registro_compras(self):
+
+        data = {}
+        data['registro_compra'] = []
+        res = conexion.View("select v.id, v.nombre, v.precio, v.img, c.id from videojuegos v, registro_compra c where v.id = c.idJuego and c.idUsuario = '{}'".format(self.correo))
+        for i in res:
+            data['registro_compra'].append({'id':i[0], 'nombre':i[1], 'precio':i[2], 'img':i[3], 'idRegistro':i[4]})
+        return data['registro_compra']                                                                                                                                                                                                                                                                                                                                                                                                                    
+
     

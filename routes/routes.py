@@ -1,4 +1,4 @@
-from controllers.controllers import RegisterUserControllers, LoginUserControllers, HomeControllers, StockControllers, ToPostControllers, CarritoControllers, CarritoStockControllers, BuyStockControllers
+from controllers.controllers import RegisterUserControllers, LoginUserControllers, HomeControllers, StockControllers, ToPostControllers, CarritoControllers, CarritoStockControllers, BuyStockControllers, RegistroCompraControllers
 
 
 user = {
@@ -9,6 +9,7 @@ user = {
     "stock_user": "/api/v01/user/stock/<id>", "stock": StockControllers.as_view("stock_api"),
     "CarritoStock_user": "/api/v01/user/carritoStock/<id>/<token>", "CarritoStock": CarritoStockControllers.as_view("CarritoStock_api"),
     "buyStock_user": "/api/v01/user/buyStock", "buyStock": BuyStockControllers.as_view("buyStock_api"),
+    "registroCompra_user": "/api/v01/user/registroCompra/<id>/<token>", "registroCompra": RegistroCompraControllers.as_view("registroCompra_api"),
 }
 
  

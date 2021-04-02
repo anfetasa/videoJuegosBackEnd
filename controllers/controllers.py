@@ -195,3 +195,21 @@ class BuyStockControllers(MethodView):
         
         return jsonify({"Status": "Ok",
                         }), 200
+
+class RegistroCompraControllers(MethodView):
+
+    def post(self, id, token):
+        
+        datos_token = ""
+        correo = ""
+        tokenR = request.headers.get('Authorization').split(" ")
+        token = tokenR[1]
+       
+        datos_token = jwt.decode(token, KEY_TOKEN_AUTH , algorithms=['HS256'])
+        correo = datos_token.get("correo")
+
+        registro = Games()
+        registro.correo = correo
+
+        answer = registro.get_registro_compras()
+        return jsonify(answer)

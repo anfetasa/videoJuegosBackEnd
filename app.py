@@ -3,7 +3,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 
-from models.conexion import *
+from models.conexion import * 
 
 CORS(app, resources={
     r"/*": {"origins": "*"},
